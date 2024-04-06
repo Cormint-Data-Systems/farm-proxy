@@ -1,0 +1,66 @@
+# Cormint default configuration
+
+[[server]]
+name = "CormintServer1"
+port = 5010
+#extranonce_size=4
+
+#Vnish firmware broken for Luxor
+#[[target]]
+#name = "Luxor"
+#url = "stratum+tcp://btc.global.luxor.tech:700"
+#user_identity = "txtest.farmproxy"
+#aggregation = 50
+#extranonce_size = 8
+
+[[target]]
+name = "Foundry"
+url = "stratum+tcp://btc.foundryusapool.com:3333"
+user_identity = "fortblocks.farmproxy"
+#aggregation = 50
+#extranonce_size = 6
+
+#[[target]]
+#name = "Foundry2"
+#url = "stratum+tcp://btc.foundryusapool.com:443"
+#user_identity = "fortblocks.farmproxy"
+#aggregation = 50
+#extranonce_size = 6
+
+#[[target]]
+#name = "Foundry3"
+#url = "stratum+tcp://btc.foundryusapool.com:25"
+#user_identity = "fortblocks.farmproxy"
+#aggregation = 50
+#extranonce_size = 6
+
+#[[target]]
+#name = "ViaBTC"
+#url = "stratum+tcp://btc.viabtc.io:3333"
+#user_identity = "wescormint.farmproxy"
+#aggregation = 50
+#extranonce_size = 6
+
+[[routing]]
+name = "RD"
+from = ["CormintServer1"]
+
+[[routing.goal]]
+name = "Primary Goal"
+hr_weight = 100
+
+#[[routing.goal.level]]
+#targets = ["Luxor"]
+
+[[routing.goal.level]]
+targets = ["Foundry"]
+
+#[[routing.goal.level]]
+#targets = ["Foundry2"]
+
+#[[routing.goal.level]]
+#targets = ["Foundry3"]
+
+#[[routing.goal.level]]
+#targets = ["ViaBTC"]
+~                           

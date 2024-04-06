@@ -9,7 +9,7 @@ services:
     container_name: farm-proxy
     network_mode: "host"
     volumes:
-      - "./config/sample.toml:/conf/farm_proxy.toml"
+      - "./config/cormint.toml:/conf/farm_proxy.toml"
     environment:
       - CONF_PATH=/conf/farm_proxy.toml
       - RUST_LOG=info
@@ -23,20 +23,20 @@ services:
         compress: "true"
     ulimits:
       nofile:
-        hard: "1048576"
-        soft: "262144"
+        hard: 1048576
+        soft: 262144
   # metrics-exporter is a program, which performs device discovery on the defined network and pulls data from miners running a Stock FW. As a result, those data can be digested by Prometheus and visualized in Grafana dashboard, see dashboard "Farm Dashboard"
-  metrics-exporter:
-    image: braiinssystems/farm-monitor:23.01
-    container_name: metrics-exporter
-    network_mode: "host"
-    volumes:
-      - ./monitoring/metrics-exporter:/etc/metrics-exporter
-      - scanner_data:/mnt:rw
-    command:
-      - '--config=/etc/metrics-exporter/metrics-exporter.toml'
-      - '--sd-file=/mnt/bos_miners.json'
-    restart: unless-stopped
+  # metrics-exporter:
+  #   image: braiinssystems/farm-monitor:23.01
+  #   container_name: metrics-exporter
+  #   network_mode: "host"
+  #   volumes:
+  #     - ./monitoring/metrics-exporter:/etc/metrics-exporter
+  #     - scanner_data:/mnt:rw
+  #   command:
+  #     - '--config=/etc/metrics-exporter/metrics-exporter.toml'
+  #     - '--sd-file=/mnt/bos_miners.json'
+  #   restart: unless-stopped
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
